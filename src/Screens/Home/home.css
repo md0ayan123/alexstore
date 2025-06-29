@@ -1,0 +1,25 @@
+.card-container{
+    display: flex;
+    width: 300px;
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0px auto;
+}
+.filter-section{
+    display: flex;
+    flex-direction: column  ;
+    width: 300px;
+    height: 100%;
+  
+}
+.page-box{
+   display: flex;
+}
+
+@media screen and (max-width:555px){
+    .page-box{
+        display: block;
+    }
+    
+}
