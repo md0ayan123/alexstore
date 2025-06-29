@@ -2,6 +2,7 @@ import React, { useEffect ,useState} from 'react'
 import CardItems from '../CardItems/CardItems'
 import Navbar from '../../Components/Navbar/Navbar'
 import './home.css'
+import { baseUrl } from '../../utils/constant'
 
 // import { base64ToBlob } from '../../utils/commonServices'
 // import { useCart } from '../../Components/context/cart._context'
@@ -18,7 +19,7 @@ const Home = () => {
   // const procduct=useCart()
   
 const allProduct=async()=>{
-  const response = await fetch('http://localhost:5000/products/listed',)
+  const response = await fetch(`${baseUrl}/products/listed`,)
   const result=await response.json()
 
   if (!response.ok) {

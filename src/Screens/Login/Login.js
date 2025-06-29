@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 import './login.css'
+import { baseUrl } from '../../utils/constant';
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -24,8 +25,8 @@ const Login = () => {
 
     try {
       const url = isSignIn
-        ? 'http://localhost:5000/user/register'
-        : 'http://localhost:5000/user/signup';
+        ? `${baseUrl}/user/register`
+        : `${baseUrl}/user/signup`;
 
       const response = await axios.post(url, formData, {
         headers: {

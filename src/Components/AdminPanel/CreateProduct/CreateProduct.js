@@ -3,6 +3,7 @@ import axios from 'axios'
 import './createProduct.css'
 
 import { useState } from 'react';
+import { baseUrl } from '../../../utils/constant';
 
 const CreateProduct = () => {
   const [formData, setFormData] = useState({
@@ -54,7 +55,7 @@ const CreateProduct = () => {
     console.log("Payload sending to backend:", payload);
      
     try {
-      const res = await axios.post('http://localhost:5000/products/create', payload, {
+      const res = await axios.post(`${baseUrl}/products/create`, payload, {
         headers: {
           'Content-Type': 'application/json'
         }
