@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { useCart, useDispatchCart } from '../context/cart._context';
 import './cart.css';
 import axios from 'axios'
+import { baseUrl } from '../../utils/constant';
 
 
 const Cart = () => {
-  const [showConfirmation, setShowConfirmation] = useState(false); 
+  // const [showConfirmation, setShowConfirmation] = useState(false); 
   let data = useCart();
   const dispatch = useDispatchCart();
 
@@ -24,10 +25,7 @@ const Cart = () => {
   const handleCheckout = () => {
     dispatch({ type: 'CLEAR' });
     setQuantities([]);
-    // setShowConfirmation(true);
-    // setTimeout(() => {
-    //   setShowConfirmation(false);
-    // }, 4000);
+
   };
  
     function loadScript(src) {
@@ -54,7 +52,7 @@ const Cart = () => {
         }
 
         const totalAmount = data.reduce((acc, item, index) => acc + item.price * quantities[index], 0);
-        const result = await axios.post("http://localhost:5000/payment/orders", { amount: totalAmount });
+        const result = await axios.post(`${baseUrl}/payment/orders`, { amount: totalAmount });
 
         if (!result) {
             alert("Server error. Are you online?");
@@ -79,7 +77,7 @@ const Cart = () => {
                     razorpaySignature: response.razorpay_signature,
                 };
 
-                const result = await axios.post("http://localhost:5000/payment/success", data);
+                const result = await axios.post(`${baseUrl}/payment/success`, data);
                 
                 
               if (result.data.msg === "success") {
@@ -112,18 +110,6 @@ const Cart = () => {
   await displayRazorpay();
 };
 
-  // if (data.length === 0) {
-  //   return (
-  //     <div className='container'>
-  //       {showConfirmation && (
-  //         <div className="confirmation-popup ">
-  //           Order placed successfully!
-  //         </div>
-  //       )}
-  //       <div className='m-5 text-center fs-3'>The Cart is Empty!</div>
-  //     </div>
-  //   );
-  // }
 
 
 

@@ -26,10 +26,7 @@ const Navbar = () => {
       </ul>
     </div>
   )
-  {/* <div className='btn bg-white text-success mx-2'  onClick={()=>{setCartView(true)}}>My Cart <span className=" badge rounded-pill bg-danger" >
-    {data.length}</span></div> */}
-    {/* {cartView ? <Modal onClose={()=>setCartView(false)}><Cart/></Modal> : null} */}
-    {/* <button className='btn bg-danger text-white mx-2' onClick={handleLogOut}>logout</button> */}
+  
   }
 
 export default Navbar

@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useState } from 'react'
 import './loginAdmin.css'
 import {useNavigate} from 'react-router-dom'
+import { baseUrl } from '../../../utils/constant'
 
 const LoginAdmin = () => {
     const navigate=useNavigate()
@@ -20,7 +21,7 @@ const LoginAdmin = () => {
     e.preventDefault();
   
     try {
-      const res = await axios.post('http://localhost:5000/owner/login', formData, {
+      const res = await axios.post(`${baseUrl}/owner/login`, formData, {
         headers: {
           'Content-Type': 'application/json'
         }

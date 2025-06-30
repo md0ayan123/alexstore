@@ -11,18 +11,14 @@ router.post("/orders", async (req, res) => {
             key_id: process.env.RAZORPAY_KEY_ID,
             key_secret: process.env.RAZORPAY_SECRET,
         });
-        const { amount } = req.body; // 👈 Accept amount from frontend
+        const { amount } = req.body; 
 
         const options = {
-            amount: Math.round(amount * 100), // convert to cents (smallest unit)
-            currency: "USD", // 👈 Change currency to USD
+            amount: Math.round(amount * 100), 
+            currency: "USD", 
             receipt: "receipt_order_74394"
         };
-        // const options = {
-        //     amount: 50000, // amount in smallest currency unit
-        //     currency: "INR",
-        //     receipt: "receipt_order_74394",
-        // };
+       
 
         const order = await instance.orders.create(options);
 
@@ -35,7 +31,7 @@ router.post("/orders", async (req, res) => {
 });
 router.post("/success", async (req, res) => {
     try {
-        // getting the details back from our font-end
+        
         const {
             orderCreationId,
             razorpayPaymentId,
@@ -43,9 +39,7 @@ router.post("/success", async (req, res) => {
             razorpaySignature,
         } = req.body;
 
-        // Creating our own digest
-        // The format should be like this:
-        // digest = hmac_sha256(orderCreationId + "|" + razorpayPaymentId, secret);
+ 
         const shasum = crypto.createHmac("sha256", process.env.RAZORPAY_SECRET);
 
         shasum.update(`${orderCreationId}|${razorpayPaymentId}`);

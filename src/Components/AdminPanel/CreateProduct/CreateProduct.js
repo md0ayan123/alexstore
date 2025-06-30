@@ -4,6 +4,7 @@ import './createProduct.css'
 
 import { useState } from 'react';
 import { baseUrl } from '../../../utils/constant';
+// import { useNavigate } from 'react-router-dom';
 
 const CreateProduct = () => {
   const [formData, setFormData] = useState({
@@ -13,13 +14,12 @@ const CreateProduct = () => {
     description: '',
     image: '',
   });
-
+// const navigate=useNavigate()
   const handleChange = async (e) => {
     if (e.target.name === 'image') {
       const file = e.target.files[0];
       if (file) {
         const base64 = await toBase64(file);
-        // console.log(base64Data,"baserrrrr")
        const base64Data=base64.split(',')[1]
         setFormData({ ...formData, image: base64Data });
       }
@@ -63,6 +63,7 @@ const CreateProduct = () => {
 
       console.log(res.data);
       alert('Product created successfully!');
+      // navigate('/admin/createproduct')
     } catch (err) {
       console.error(err);
       alert('Error creating product');
@@ -95,7 +96,7 @@ const CreateProduct = () => {
 
         <div class="mb-3">
         <label for="formFile" class="form-label">Default file input example</label>
-        <input class="form-control" type="file" id="formFile"/>
+        <input class="form-control" type="file" name='image' accept='image/*' id="formFile" onChange={handleChange}/>
       </div>
 
       <button  className='btn bg-secondary rounded p-3 ' type="submit">Create Product</button>

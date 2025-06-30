@@ -4,7 +4,7 @@ const productModels = require("../models/product-models")
 const isLoggin =require("../middleware/auth")
 const jwt=require("jsonwebtoken")
 
-router.post('/create',isLoggin, async function(req, res) {
+router.post('/create', async function(req, res) {
   console.log("api create is running ");
   
   let {image, name, price, title, description } = req.body;
@@ -25,7 +25,7 @@ router.post('/create',isLoggin, async function(req, res) {
        const token = jwt.sign(
                       { user: { id: user._id } },
                       process.env.SECRET_KEY,
-                      { expiresIn: '1h' } // optional, token expiry
+                      { expiresIn: '1h' } 
                   );
                   res.cookie("token", token, { httpOnly: true });
       
@@ -45,13 +45,7 @@ router.get('/listed', async function(req,res){
     message:"getting a product",
     result:data
   })
-  //  const token = jwt.sign(
-  //                 { user: { id: user._id } },
-  //                 process.env.SECRET_KEY,
-  //                 { expiresIn: '1h' } // optional, token expiry
-  //             );
-  //             res.cookie("token", token, { httpOnly: true });
-  //             console.log(token);
+  
               
   
   

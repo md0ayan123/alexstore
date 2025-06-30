@@ -1,22 +1,17 @@
-import React, { useEffect ,useState} from 'react'
+import { useEffect ,useState} from 'react'
 import CardItems from '../CardItems/CardItems'
 import Navbar from '../../Components/Navbar/Navbar'
 import './home.css'
 import { baseUrl } from '../../utils/constant'
 
-// import { base64ToBlob } from '../../utils/commonServices'
-// import { useCart } from '../../Components/context/cart._context'
+
 
 
 
 
 const Home = () => {
-
-  const [selectedCat, setSelectedCat] = useState('');
- const [isLoggin,setIsLoggin]=useState(false)
-
   const[data,setData]=useState([])
-  // const procduct=useCart()
+
   
 const allProduct=async()=>{
   const response = await fetch(`${baseUrl}/products/listed`,)
@@ -33,24 +28,6 @@ const allProduct=async()=>{
   }
   
 }
-
-
-
-
-
-// useEffect(() => {
-//   const fetchProducts = async () => {
-//       const res = await fetch(`https://fakestoreapi.com/products/category/${selectedCat}`);
-//       const data = await res.json();
-//       setData(data);
-//   };
-//   if(selectedCat){
-//     fetchProducts();
-//   }else{
-//     allProduct()
-//   }
-// }, [selectedCat]);
-
   useEffect(()=>{
     allProduct()
   },[])

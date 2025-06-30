@@ -52,7 +52,7 @@ const Login = () => {
   };
 
   return (
-    <div  style={{ backgroundColor: 'rgba(50, 50, 50, 0.1)', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: 'rgba(50, 50, 50, 0.1)', minHeight: '100vh' }}>
       <h2 className="p-4">Alex Store</h2>
       <div className="container d-flex justify-content-center  align-items-center">
         <form className="form-input p-5 border" onSubmit={handleSubmit}>
@@ -97,18 +97,18 @@ const Login = () => {
           </div>
 
           <button
-  className="mt-3 bg-secondary p-3  rounded" 
-  type="submit"
-  disabled={
-    isSignIn
-      ? !formData.fullName || !formData.email || !formData.password
-      : !formData.email || !formData.password
-  }
->
-  {isSignIn ? 'Create Account' : 'Login'}
-</button>
+            className="mt-3 bg-secondary p-3  rounded"
+            type="submit"
+            disabled={
+              isSignIn
+                ? !formData.fullName || !formData.email || !formData.password
+                : !formData.email || !formData.password
+            }
+          >
+            {isSignIn ? 'Create Account' : 'Login'}
+          </button>
 
-          <div className="mt-3"> 
+          <div className="mt-3">
             {isSignIn ? (
               <>
                 Already have an account?{' '}

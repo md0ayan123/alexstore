@@ -45,40 +45,7 @@ router.post('/register', async function(req, res) {
 
 })
 
-// router.post('/signup', async function (req,res) {
-// let {email,password}=req.body
-// try {
-//     let user=registerModel.findOne({email})
-//     if(!user){
-//         return res.status(401).json({
-//             succes:false,
-//             message:"invaild credentials"
-//         })
-//     }
-//     bcrypt.compare(password,user.password,function(err,result){
-//         if(result){
-//               const token = jwt.sign(
-//                 { user: { id: user._id } },
-//                 process.env.SECRET_KEY,
-//                 { expiresIn: '1h' } 
-//             );
-//             res.cookie("token", token, { httpOnly: true });
-            
-//             return res.status(200).json({
-//                 success:true,
-//                 message:"login successfully",
-//                 result:result
-//             })
-//         }
-//     })
-// } catch (error) {
-//      console.error( error);
-//                 return res.status(500).json({
-//                     success: false,
-//                     message: "Internal server error"
-//                 });
-// }
-// })
+
 router.post('/signup', async function (req, res) {
     let { email, password } = req.body;
 
