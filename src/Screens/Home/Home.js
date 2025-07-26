@@ -1,53 +1,60 @@
-import { useEffect ,useState} from 'react'
-import CardItems from '../CardItems/CardItems'
-import Navbar from '../../Components/Navbar/Navbar'
-import './home.css'
-import { baseUrl } from '../../utils/constant'
-
-
-
-
-
+import { useEffect, useState } from 'react';
+import CardItems from '../CardItems/CardItems';
+import Navbar from '../../Components/Navbar/Navbar';
+import './home.css';
+import { baseUrl } from '../../utils/constant';
 
 const Home = () => {
-  const[data,setData]=useState([])
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
-  
-const allProduct=async()=>{
-  const response = await fetch(`${baseUrl}/products/listed`,)
-  const result=await response.json()
+  const handleSearch = (query) => {
+    const filtered = products.filter(product =>
+      product.title.toLowerCase().includes(query.toLowerCase()) || 
+      product.description.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredProducts(filtered);
+  };
 
-  if (!response.ok) {
-    console.log(result.error);
-    return;
-}
-  if(response.ok){
-    console.log('resultss',result);
-    setData(result)
-    
-  }
-  
-}
-  useEffect(()=>{
-    allProduct()
-  },[])
+  const fetchProducts = async () => {
+    const response = await fetch(`${baseUrl}/products/listed`);
+    const result = await response.json();
 
+    if (response.ok) {
+      setProducts(result.result); 
+      setFilteredProducts(result.result);
+    } else {
+      console.log(result.error);
+    }
+  };
 
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   return (
     <div>
-      <Navbar />
-      <div className='page-box'>
-     <div className='row p-4'>
-      {data.result?.map((element,index)=>{      
-        return <div key={index} className='card-container col-md-4 mt-4' >
-          <CardItems key={index} id={element.id}  image={"data:image/jpg;base64," + element.image} description={element.description} price={element.price} title={element.title}/>
+      <Navbar onSearch={handleSearch}  />
+      <div className='page-box ' >
+        <div className="row">
+          {filteredProducts.map((product) => {
+              return <div className='card-container col-md-5 mb-5 mt-3'>
+                     <CardItems
+              key={product._id}
+              _id={product._id}
+              image={"data:image/jpg;base64," + product.image}
+              description={product.description}
+              price={product.price}
+              title={product.title}
+            />
+              </div>
+           
+           } )}
+        
         </div>
-      })}
-     </div>
+      </div>
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

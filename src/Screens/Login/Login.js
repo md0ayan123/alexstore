@@ -3,9 +3,11 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 import './login.css'
 import { baseUrl } from '../../utils/constant';
-
+import Navbar from '../../Components/Navbar/Navbar';
+ import { toast } from 'react-toastify';
+import logo from '../../././assets/ALEX STORE-logo-transparent.png'
 const Login = () => {
-  const [isSignIn, setIsSignIn] = useState(true);
+  const [isSignIn, setIsSignIn] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -35,7 +37,7 @@ const Login = () => {
       });
 
       console.log(`User ${isSignIn ? 'registered' : 'logged in'} successfully`, response.data);
-      alert(`User ${isSignIn ? 'registered' : 'logged in'} successfully`);
+      toast(`User ${isSignIn ? 'registered' : 'logged in'} successfully`);
 
       setFormData({
         fullName: '',
@@ -43,17 +45,23 @@ const Login = () => {
         password: ''
       });
       if (!isSignIn) {
-        navigate('/home')
+         localStorage.setItem('token', JSON.stringify(response.data.user || response.data));
+        navigate('/')
       }
     } catch (error) {
       console.log(`User ${isSignIn ? 'registration' : 'login'} failed`, error.response ? error.response.data : error);
-      alert(`User ${isSignIn ? 'registration' : 'login'} failed: ${error.response?.data?.message || 'Something went wrong'}`);
+     toast(`User ${isSignIn ? 'registration' : 'login'} failed: ${error.response?.data?.message || 'Something went wrong'}`);
     }
   };
 
   return (
-    <div style={{ backgroundColor: 'rgba(50, 50, 50, 0.1)', minHeight: '100vh' }}>
-      <h2 className="p-4">Alex Store</h2>
+    <>
+    <div className='nav-heading'>
+      <img src={logo} alt="" style={{width:"200px"}} />
+    </div>
+       <div style={{ background:"linear-gradient(to bottom right,#feedf6,#fcf0e2)", minHeight: '100vh',display:"flex", justifyContent:"center",}}  >
+      {/* <img src={logo} className='' alt="" style={{width:"220px",backgroundColor:"#ffff"}}/> */}
+      
       <div className="container d-flex justify-content-center  align-items-center">
         <form className="form-input p-5 border" onSubmit={handleSubmit}>
           <h2 className='d-flex justify-content-center mt-2'>{isSignIn ? 'Create your account' : 'Login'}</h2>
@@ -97,7 +105,8 @@ const Login = () => {
           </div>
 
           <button
-            className="mt-3 bg-secondary p-3  rounded"
+            className="mt-3 rounded p-3"
+            style={{backgroundColor:"#ff3f6c" ,color:"#ffff" }}
             type="submit"
             disabled={
               isSignIn
@@ -134,6 +143,8 @@ const Login = () => {
         </form>
       </div>
     </div>
+    </>
+ 
   );
 };
 

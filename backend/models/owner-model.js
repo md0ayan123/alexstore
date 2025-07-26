@@ -1,4 +1,4 @@
-const mongoose=require("mongoose")
+import mongoose from "mongoose"
 
 const ownerSchema=mongoose.Schema({
    
@@ -11,4 +11,4 @@ const ownerSchema=mongoose.Schema({
         required:true
     }
 })
-module.exports=mongoose.model("owner",ownerSchema)
+export default mongoose.model("owner",ownerSchema)

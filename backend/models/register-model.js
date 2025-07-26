@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+import mongoose from "mongoose"
 
 const registerSchema = ({
     fullName: {
@@ -15,4 +15,4 @@ const registerSchema = ({
     }
 
 })
-module.exports = mongoose.model("register", registerSchema)
+export default mongoose.model("register", registerSchema)

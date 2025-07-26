@@ -15,11 +15,15 @@
 }
 .page-box{
    display: flex;
+   width: 100%;
+   margin: 0px auto;
+   
 }
 
 @media screen and (max-width:555px){
     .page-box{
-        display: block;
+        display: flex;
+        margin:0px auto;
     }
     
 }

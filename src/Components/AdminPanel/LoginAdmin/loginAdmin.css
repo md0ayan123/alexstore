@@ -7,23 +7,24 @@
     height: 100vh;
 }
 .form-input{
+  border: 2px solid red;
 display: flex;
-border: 2px solid black;
 border-radius: 12px;
 box-shadow: inset;
 width: auto;
 flex-direction: column;
-gap:10px;
+gap:12px;
 background-color: #fff;
 
-  /* align-items: center; */
+
 }
 .input-box{
     display: flex;
     flex-direction: column;
-    width: 400px;
+    width: 300px;
 }
 .input{
   border-radius:12px ;
-  padding: 12px;
+  padding: 4px;
+  
 }

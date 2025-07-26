@@ -4,8 +4,8 @@ import './createProduct.css'
 
 import { useState } from 'react';
 import { baseUrl } from '../../../utils/constant';
-// import { useNavigate } from 'react-router-dom';
-
+ import { toast } from 'react-toastify';
+import AdminNavbar from '../adminNavbar/AdminNavbar';
 const CreateProduct = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -41,7 +41,7 @@ const CreateProduct = () => {
     e.preventDefault();
 
     if (!formData.image) {
-      alert("Please select an image");
+      toast("Please select an image");
       return;
     }
     
@@ -62,46 +62,50 @@ const CreateProduct = () => {
       });
 
       console.log(res.data);
-      alert('Product created successfully!');
+      toast('Product created successfully!');
       // navigate('/admin/createproduct')
     } catch (err) {
       console.error(err);
-      alert('Error creating product');
+      toast('Error creating product');
     }
   };
 
   return (
-    <div className='create-product'>
-       <form className='form-input p-5 border' onSubmit={handleSubmit}>
-        <h1 className='d-flex justify-content-center'>Create Product </h1>
-      <div className='input-box '>
+    <>
+     
+        <div className='create-product'>
+       <form className='product-form p-5 ' onSubmit={handleSubmit}>
+        <h3 className='d-flex justify-content-center mb-4'>Create Product </h3>
+      <div className='input-box mt-3 '>
           <label className='form-label'>Product Name</label>
-         <input className="input p-2" type="text" name="name"  onChange={handleChange} required />
+         <input className="input " type="text" name="name"  onChange={handleChange} required />
       </div>
       
-      <div className='input-box '>
+      <div className='input-box mt-3'>
           <label className='form-label'>Price</label>
-        <input className='input p-2' type="text" name="price" onChange={handleChange} required />
+        <input className='input ' type="text" name="price" onChange={handleChange} required />
       </div>
       
-      <div className='input-box '>
+      <div className='input-box mt-3'>
           <label className='form-label p-0'>Title</label>
-        <input className='input p-2' type="text" name="title"  onChange={handleChange} required />
+        <input className='input ' type="text" name="title"  onChange={handleChange} required />
       </div>  
      
-     <div className='input-box'>
+     <div className='input-box mt-3'>
         <label className='form-label'>Description</label>
       <textarea className='input'  name="description"  onChange={handleChange} required></textarea>
      </div>
 
-        <div class="mb-3">
+        <div class="mt-3">
         <label for="formFile" class="form-label">Default file input example</label>
         <input class="form-control" type="file" name='image' accept='image/*' id="formFile" onChange={handleChange}/>
       </div>
 
-      <button  className='btn bg-secondary rounded p-3 ' type="submit">Create Product</button>
+      <button  className='btn btn-primary rounded p-2 text-white mt-3' type="submit">Create Product</button>
 
     </form></div>
+    </>
+
    
   );
 };

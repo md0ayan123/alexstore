@@ -4,7 +4,16 @@
     justify-content:center ;
     height: 100vh;
     padding: 23px;  
-    background-color: rgba(50, 50, 50, 0.1);
-    /* border: 2px solid red; */
+
+}
+.product-form{
+    display: flex;
+    border:2px solid #000000;
+    flex-direction: column;
+    background-color: #fff;
+    color: #000000;
+    border-radius: 12px;
+    align-items: center; 
+     justify-content: center;
 }
 

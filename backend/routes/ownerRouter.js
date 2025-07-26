@@ -1,47 +1,12 @@
-const express = require("express")
-const ownerModel = require("../models/owner-model")
-const router = express.Router()
-const bcrypt = require("bcrypt");
+import express from 'express'
+const router=express.Router()
+import OwnerController from '../controllers/ownerController.js'
 
-router.post("/login", async function (req, res) {
-    let { email, password } = req.body;
 
-    console.log(req.body);
-    
-    try {
-        const owner = await ownerModel.findOne({ email });
+router.post('/login', async (req,res)=>{
+    const result=await OwnerController.admin(req.body)
+    res.status(result.success ? 200 : 401).json(result);
+})
 
-        console.log(owner);
-        if (!owner) {
-            return res.status(404).json({
-                success: false,
-                message: "user not found"
-            });
-        }
 
-        const isMatch = await bcrypt.compare(password, owner.password);
-
-        if (!isMatch) {
-            return res.status(401).json({
-                success: false,
-                message: "Invalid credentials"
-            });
-        }
-
-     
-        return res.status(200).json({
-            success: true,
-            message: "Login successfully"
-          
-        });
-
-    } catch (error) {
-        console.error("Login error:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Internal server error"
-        });
-    }
-});
-
-module.exports = router
+export default router

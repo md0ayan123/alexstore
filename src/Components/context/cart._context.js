@@ -7,7 +7,7 @@ const CartDispatchContext = createContext();
 const reducer = (state, action) => {
   switch (action.type) {
     case "ADD":
-      return [...state, { id: action.id, category: action.category, price: action.price,image: action.image,rating: action.rating,title: action.title,description:action.description }];
+      return [...state, { _id: action._id, category: action.category, price: action.price,image: action.image,rating: action.rating,title: action.title,description:action.description }];
      
       
     case "REMOVE":
@@ -36,6 +36,7 @@ export const CartProvider = ({ children }) => {
     </CartDispatchContext.Provider>
   );
 };
+
 
 // Hooks to use context
 export const useCart = () => useContext(CartStateContext);

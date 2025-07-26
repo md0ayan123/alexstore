@@ -1,4 +1,4 @@
-const mongoose=require('mongoose')
+import mongoose from 'mongoose'
 
 mongoose.connect("mongodb+srv://mdayan835:ma687VEWl7IivuWI@cluster0.zwddd3i.mongodb.net/alexStore")
 .then(function(){
@@ -8,4 +8,4 @@ mongoose.connect("mongodb+srv://mdayan835:ma687VEWl7IivuWI@cluster0.zwddd3i.mong
     console.log(err);
     
 })
-module.exports=mongoose.connection
+export default mongoose.connection
