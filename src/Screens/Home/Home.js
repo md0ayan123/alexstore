@@ -33,12 +33,15 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <Navbar onSearch={handleSearch}  />
-      <div className='page-box ' >
+    <div className='navbar-card-container '>
+      <div>
+         <Navbar onSearch={handleSearch}  />
+         </div>
+     
+      <div className=' p-4' >
         <div className="row">
           {filteredProducts.map((product) => {
-              return <div className='card-container col-md-5 mb-5 mt-3'>
+              return <div className='card-container col-md-4 mt-4 '>
                      <CardItems
               key={product._id}
               _id={product._id}

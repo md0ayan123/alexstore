@@ -1,11 +1,10 @@
-
 import axios from 'axios'
 import './createProduct.css'
-
 import { useState } from 'react';
 import { baseUrl } from '../../../utils/constant';
- import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import AdminNavbar from '../adminNavbar/AdminNavbar';
+
 const CreateProduct = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -41,7 +40,7 @@ const CreateProduct = () => {
     e.preventDefault();
 
     if (!formData.image) {
-      toast("Please select an image");
+      toast.warn("Please select an image");
       return;
     }
     
@@ -62,11 +61,11 @@ const CreateProduct = () => {
       });
 
       console.log(res.data);
-      toast('Product created successfully!');
+      toast.success('Product created successfully!');
       // navigate('/admin/createproduct')
     } catch (err) {
       console.error(err);
-      toast('Error creating product');
+      toast.error('Error creating product');
     }
   };
 
@@ -74,8 +73,8 @@ const CreateProduct = () => {
     <>
      
         <div className='create-product'>
-       <form className='product-form p-5 ' onSubmit={handleSubmit}>
-        <h3 className='d-flex justify-content-center mb-4'>Create Product </h3>
+       <form className='product-form' onSubmit={handleSubmit}>
+        <h3 className='d-flex justify-content-center '>Create Product </h3>
       <div className='input-box mt-3 '>
           <label className='form-label'>Product Name</label>
          <input className="input " type="text" name="name"  onChange={handleChange} required />
@@ -87,7 +86,7 @@ const CreateProduct = () => {
       </div>
       
       <div className='input-box mt-3'>
-          <label className='form-label p-0'>Title</label>
+          <label className='form-label '>Title</label>
         <input className='input ' type="text" name="title"  onChange={handleChange} required />
       </div>  
      
@@ -96,7 +95,7 @@ const CreateProduct = () => {
       <textarea className='input'  name="description"  onChange={handleChange} required></textarea>
      </div>
 
-        <div class="mt-3">
+        <div class="input-box  mt-3">
         <label for="formFile" class="form-label">Default file input example</label>
         <input class="form-control" type="file" name='image' accept='image/*' id="formFile" onChange={handleChange}/>
       </div>

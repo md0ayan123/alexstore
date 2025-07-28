@@ -65,13 +65,13 @@ useEffect(() => {
   return (
     <>
     <div className='right-content'>
-    <div className='row dashboardWrapperRow'>
-      <div className='col-md-12'>
-          <div className='dashboardBoxWrapper d-flex gap-3 w-100'>
-        <div className='dashboardBox p-4' style={{backgroundImage:"linear-gradient(to right,#1da256,#48d483)"}}>   
+    <div className='row dashboardWrapperRow '>
+      <div className='col-md-12 d-flex justify-content-center'>
+          <div className='dashboardBoxWrapper  w-100  gap-3 d-flex  flex-wrap justify-content-center'>
+        <div className='dashboardBox' style={{backgroundImage:"linear-gradient(to right,#1da256,#48d483)"}}>   
          <div className='d-flex w-100 justify-content-between'>
           <div className='col1'>
-            <h4 className='text-white fs-4 mb-0 '>Total User</h4>
+            <h4 className='text-white fs-4 mb-0 fs-sm-5'>Total User</h4>
             <span className="text-white fs-1 fw-bold lh-1">{data?.users ?? 0}</span>
               <div className='trendingIcon'>
               <IoIosTrendingUp />
@@ -93,7 +93,7 @@ useEffect(() => {
         <div className='dashboardBox' style={{backgroundImage:"linear-gradient(to right,#c012e2,#eb64fe)"}}> 
            <div className='d-flex w-100 justify-content-between'>
           <div className='col1'>
-            <h4 className='text-white fs-4 mb-0 '>Total Orders</h4>
+            <h4 className='text-white fs-4  fs-sm-5 mb-0 '>Total Orders</h4>
             <span className="text-white fs-1 fw-bold lh-1">{data?.orders ?? 0}</span>
              <div className='trendingIcon'>
               <IoIosTrendingUp />
@@ -113,7 +113,7 @@ useEffect(() => {
         <div className='dashboardBox' style={{backgroundImage:"linear-gradient(to right,#2c78e5,#60aff5)"}}>   
            <div className='d-flex w-100 justify-content-between'>
           <div className='col1'>
-            <h4 className='text-white fs-4 mb-0 '>Total Products</h4>
+            <h4 className='text-white fs-4  fs-sm-5 mb-0 '>Total Products</h4>
             <span className="text-white fs-1 fw-bold lh-1">{data?.products ?? 0}</span>
              <div className='trendingIcon'>
               <IoIosTrendingUp />
@@ -133,7 +133,7 @@ useEffect(() => {
         <div className='dashboardBox' style={{backgroundImage:"linear-gradient(to right,#e1950e,#f3cd29)"}}>   
            <div className='d-flex w-100 justify-content-between'>
           <div className='col1'>
-            <h4 className='text-white fs-4 mb-0 '>Reviews</h4>
+            <h4 className='text-white fs-4  fs-sm-5 mb-0 '>Reviews</h4>
             <span className="text-white fs-1 fw-bold lh-1">277</span>
              <div className='trendingIcon'>
               <IoIosTrendingUp />
@@ -180,7 +180,7 @@ useEffect(() => {
       <h4>Monthly Sales Overview</h4>
       {monthlySalesData.length > 1 ? (
         <Chart
-          chartType="BarChart"
+          chartType="ColumnChart"
           data={monthlySalesData}
           options={{
             title: "Monthly Sales",

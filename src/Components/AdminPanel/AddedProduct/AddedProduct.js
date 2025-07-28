@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { MdModeEditOutline } from 'react-icons/md';
 import { RiDeleteBin5Fill } from "react-icons/ri";
+import './AddedProduct.css'
 
 const AddedProduct = () => {
   const [formData, setFormData] = useState({
@@ -152,7 +153,7 @@ const handleRemove = async (id) => {
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={handleUpdate}>
-             <div className="" >
+             <div>
                 {formData.image && (
                 <img
                   src={`data:image/jpg;base64,${formData.image}`}
@@ -174,7 +175,7 @@ const handleRemove = async (id) => {
                 </div>
                 
              
-              <div className="">
+              <div>
               <label className="form-label">Name</label>
               <input
                 type="text"
@@ -197,7 +198,7 @@ const handleRemove = async (id) => {
               />
             </div>
 
-            <div className="">
+            <div>
               <label className="form-label">Title</label>
               <input
                 type="text"
@@ -234,7 +235,7 @@ const handleRemove = async (id) => {
       <div className="table-responsive">
         <table className="table table-bordered mt-4">
           <thead className="table-dark">
-            <tr>
+            <tr className='table-text'>
               <th>#</th>
               <th>Product Image</th>
               <th>Name</th>

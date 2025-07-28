@@ -10,13 +10,13 @@ import './Navbar.css';
 
 const Navbar = ({onSearch}) => {
   const [isToken, setIsToken] = useState(localStorage.getItem('token'));
-  const [isMobileView, setIsMobileView] = useState(window.innerWidth <669);
+  const [isMobileView, setIsMobileView] = useState(window.innerWidth <700);
   const cartItems = useCart();
 
   // Listen to screen resize
   useEffect(() => {
     const handleResize = () => {
-      setIsMobileView(window.innerWidth < 669);
+      setIsMobileView(window.innerWidth < 700);
     };
 
     window.addEventListener('resize', handleResize);
@@ -36,7 +36,7 @@ const Navbar = ({onSearch}) => {
   const handleLogOut = () => {
     localStorage.removeItem('token');
     setIsToken(null);
-    toast("Logout successfully");
+    toast.success("Logout successfully");
   };
 
   return (
@@ -52,12 +52,12 @@ const Navbar = ({onSearch}) => {
             <> 
             <div>
 
-            <div className='nav-heading d-flex flex-column justify-content-between '>
-                    <div className=' nav-content d-flex justify-content-between '>
+            <div className='nav-heading d-flex flex-column justify-content-between'>
+                    <div className=' nav-content d-flex justify-content-between w-100'>
                <div className='nav-logo ml-4'>
               <img src={logo} alt=""  className='logo' style={{width:"150px"}}/>
             </div>
-              <div className="nav-cart border border-danger">
+              <div className="nav-cart ">
                 <Link  to="/cart" className='d-flex align-items-center'>
                   <img src={shopCartIcon} alt="Cart" className='cart-icon'   />
                   <span
@@ -81,7 +81,7 @@ const Navbar = ({onSearch}) => {
                 )}
               </div>
             </div>
-            <div className="nav-search-bar">
+            <div className="nav-search-bar w-100">
                <div className="search-box d-flex align-items-center py-1" style={{
                   border: "1px solid #ccc",
                   borderRadius: "2px",

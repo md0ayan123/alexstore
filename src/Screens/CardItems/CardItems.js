@@ -15,13 +15,13 @@ const CardItems = (props) => {
   
 const handleAddToCart=async()=>{
   await dispatch({type:"ADD",_id:_id ,price:price,image:image,title:title,description:description})
-  toast("Added to card!");
+  toast.success("Added to card!");
 }
 
 
 return (
   <div>
-      <div class="card" >
+      <div class="card " >
         <div className="image-container">
         <img src={image} className='cardImg' alt="..."/>
         </div>

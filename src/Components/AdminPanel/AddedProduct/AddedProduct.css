@@ -1,0 +1,11 @@
+.table-responsive{
+     overflow-x:auto;   
+      /* display: flex;
+     flex-direction: column;
+     justify-content: center; */
+      width: 100%; 
+}
+.table-text{
+    font-size: 12px;
+    font-weight: none;
+}

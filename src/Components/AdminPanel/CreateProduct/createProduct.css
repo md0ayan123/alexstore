@@ -1,12 +1,14 @@
 .create-product{
-    
+    /* border: 2px solid red; */
     display: flex;
     justify-content:center ;
+    align-items: center;
     height: 100vh;
     padding: 23px;  
 
 }
 .product-form{
+
     display: flex;
     border:2px solid #000000;
     flex-direction: column;
@@ -14,6 +16,33 @@
     color: #000000;
     border-radius: 12px;
     align-items: center; 
+    width:400px;
+    padding: 23px 23px ;
      justify-content: center;
+}
+@media screen and (max-width:750px){
+    .create-product{
+        display: flex;
+        width: 100%;
+    }
+    .product-form{
+        width: 300px !important;
+    }
+    .input-box{
+        width: 250px !important;
+    }
+    @media screen and (max-width:450px){
+        .create-product{
+        display: flex;
+        width: 100%;
+    }
+    .product-form{
+        width: 220px !important;
+    }
+    .input-box{
+        width: 190px !important;
+ 
+    }
+    }
 }
 
