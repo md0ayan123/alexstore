@@ -1,1 +1,0 @@
-export const baseUrl="https://alexstore.onrender.com"
