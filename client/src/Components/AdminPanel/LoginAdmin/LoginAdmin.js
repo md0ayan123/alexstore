@@ -4,7 +4,7 @@ import './loginAdmin.css'
 import {useNavigate} from 'react-router-dom'
 import { baseUrl } from '../../../utils/constant'
 import {toast} from 'react-toastify'
-import logo from '../.././../assets/ALEX STORE-logo-transparent.png'
+import logo from '../.././../assets/aLEX.png'
 
 const LoginAdmin = () => {
     const navigate=useNavigate()
@@ -45,13 +45,13 @@ const LoginAdmin = () => {
 }
   return (
     <>
-      <div className='nav-heading'>
-          <img src={logo} alt="" style={{width:"200px"}} />
+      <div className='nav-admin'>
+          <img src={logo} alt="" className='px-4 py-2' style={{width:"180px"}} />
         </div>
-    <div style={{ background:"linear-gradient(to bottom right,#feedf6,#fcf0e2)" , minHeight: '100vh',display:"flex", justifyContent:"center", alignItems:"center"}}>
+    <div style={{ background:"linear-gradient(to bottom right,#feedf6,#fcf0e2)" , minHeight: '92vh',display:"flex", justifyContent:"center", alignItems:"center"}}>
  
     <div className='d-flex justify-content-center mt-5'> 
-     <form className="form-input p-5" onSubmit={handleSubmit}>
+     <form className="form-input p-md-5 p-5 mb-5" onSubmit={handleSubmit}>
         <h2 className='d-flex justify-content-center'>Admin </h2>
    
       <div className="input-box d-flex gap-1">

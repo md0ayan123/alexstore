@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useCart } from '../context/cart._context';
 import { toast } from 'react-toastify';
 import searchIcon from '../../assets/searchicon.png';
-import logo from '../../assets/ALEX-LOGO.png';
+import logo from '../../assets/aLEX.png';
 import shopCartIcon from '../../assets/shopping-bag-icon.jpg';
 import './Navbar.css';
 import { BsHandbag } from "react-icons/bs";
@@ -53,15 +53,15 @@ const Navbar = ({onSearch}) => {
             <> 
             <div>
 
-            <div className='nav-heading d-flex flex-column justify-content-between'>
-                    <div className=' nav-content d-flex justify-content-between w-100'>
+            <div className='nav-heading d-flex flex-column justify-content-between align-items-center'>
+                    <div className=' nav-content d-flex align-items-center justify-content-between w-100'>
                <div className='nav-logo ml-4'>
-              {/* <img src={logo} alt=""  className='logo' style={{width:"150px"}}/> */}
-              <span className='fs-3 fst-italic'>ALEX STORE</span>
+              <img src={logo} alt=""  className='logo' />
+              {/* <span className='fs-3 fst-italic'>ALEX STORE</span> */}
             </div>
-              <div className="nav-cart ">
-                <Link  to="/cart" className='d-flex align-items-center'>
-                <span className='text-dark fs-2'>
+              <div className="nav-cart d-flex">
+                <Link  to="/cart" className='' style={{position:"relative" , left:"12px"}}>
+                <span className='text-dark fs-4 '>
                        <BsHandbag />
                 </span>
             
@@ -80,7 +80,7 @@ const Navbar = ({onSearch}) => {
                     Logout
                   </button>
                 ) : (
-                  <Link to="/login" className="login-sigup px-1 py-1" style={{fontSize:"12px"}}>
+                  <Link to="/login" className="login-sigup px-3 py-2" style={{fontSize:"12px"}}>
                     LOGIN/SIGNUP
                   </Link>
                 )}
@@ -88,7 +88,7 @@ const Navbar = ({onSearch}) => {
             </div>
             <div className="nav-search-bar w-100 ">
                <div className="search-box d-flex align-items-center py-1" style={{
-                  border: "1px solid #ccc",
+                  border: "none",
                   borderRadius: "2px",
                   // backgroundColor: "#fff"
                 }}>
@@ -125,14 +125,14 @@ const Navbar = ({onSearch}) => {
           ) : (
             <>
             <div>
-                   <div className='nav-heading px-4 py-3'>
+                   <div className='nav-heading px-4 py-3 d-flex align-items-center'>
                <div className='nav-logo'>
-              {/* <img src={logo} alt="" className='logo' style={{width:"220px"}}/> */}
-              <span className='fs-4 fw-normal fst-italic'>ALEX STORE</span>
+              <img src={logo} alt="" className='logo' style={{width:"130px"}}/>
+              {/* <span className='fs-4 fw-normal fst-italic'>ALEX STORE</span> */}
             </div>
               <div className="nav-search-bar">
                <div className="search-box d-flex align-items-center py-1" style={{
-                                 border: "1px solid #ccc",
+                                 border: "none",
                                  borderRadius: "2px",
                                 //  backgroundColor: "#fff"
                                }}>

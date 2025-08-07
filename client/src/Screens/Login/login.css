@@ -1,3 +1,6 @@
+.nav-login{
+    background-color: #fff;
+}
 .auth-form{
    /* border: 2px solid red; */
 display: flex;
@@ -20,5 +23,8 @@ background-color: #fff;
     .form-heading{
         font-size: 24px;
         font-weight: 500;
+    }
+    .logo{
+        width: 80px !important;
     }
 }

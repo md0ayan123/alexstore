@@ -145,7 +145,7 @@ const Cart = () => {
         <div className='emptycart-container'>
             <img src={emptycart} alt="" style={{width:"146px", height:"165px"}}/>
             <span className='fw-bold fs-5' style={{color:"#424553"}}>Hey, it feels so light!</span>
-            <p style={{color:"#7e818c"}}>There is nothing in your bag, Lets' add some items. </p>
+            <p className='p-3 text-center' style={{color:"#7e818c"}}>There is nothing in your bag, Lets' add some items. </p>
             <div className='mt-3'>
               <Link className='fw-bold px-4 py-2 text-decoration-none ' to='/'  style={{color:"#ff3f6c",backgroundColor:"#fff",border:"2px solid #ff3f6c"}}>ADD ITEMS FROM WHISLIST</Link>
             </div>

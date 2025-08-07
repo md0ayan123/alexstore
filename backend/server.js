@@ -11,7 +11,6 @@
     const port = process.env.PORT || 5000;
 
     import cors from 'cors'
-
     app.use(cors());
 
 

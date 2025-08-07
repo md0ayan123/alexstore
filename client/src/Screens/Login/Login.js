@@ -5,7 +5,7 @@ import './login.css'
 import { baseUrl } from '../../utils/constant';
 
  import { toast } from 'react-toastify';
-import logo from '../../././assets/ALEX-LOGO.png'
+import logo from '../../assets/aLEX.png';
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(false);
   const [formData, setFormData] = useState({
@@ -59,14 +59,14 @@ const from = location.state?.from || '/';  // Default redirect is home
   };
 
   return (
-    <div >
-      <div className='nav-heading'>
-      {/* <img src={logo} alt="" style={{width:"200px"}} /> */}
-      <span className='fs-3 px-4 py-2 fst-italic'>ALEX STORE</span>
+    <div className='vh-100' >
+      <div className='nav-login border'>
+      <img src={logo} alt="" className='px-4 py-2' style={{width:"180px"}} />
+      {/* <span className='fs-3 px-4 py-2 fst-italic'>ALEX STORE</span> */}
     </div>
-  <div style={{ background:"linear-gradient(to bottom right,#feedf6,#fcf0e2)" , minHeight: '100vh',display:"flex", justifyContent:"center", alignItems:"center"}}>  
-       <div className='d-flex justify-content-center mt-5 p-5 '> 
-        <form className="auth-form  p-5 border " onSubmit={handleSubmit}>
+  <div style={{ background:"linear-gradient(to bottom right,#feedf6,#fcf0e2)",minHeight:"92vh" ,display:"flex", justifyContent:"center", alignItems:"center"}}>  
+       <div className='d-flex justify-content-center  p-5 '> 
+        <form className="auth-form p-md-5 p-3 border " onSubmit={handleSubmit}>
           <h2 className='form-heading  d-flex justify-content-center align-items-center mt-2'>{isSignIn ? 'Create your account' : 'Login'}</h2>
 
           {isSignIn && (
