@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import PaymentSuccess from './Components/PaymentSuccess';
 import LoginAdmin from './Components/AdminPanel/LoginAdmin/LoginAdmin';
-import EditOrder from './Components/AdminPanel/EditOrder/EditOrder';
+// import EditOrder from './Components/AdminPanel/EditOrder/EditOrder';
 import AdminRoutes from './Routes.js/AdminRoutes';
 // import NavbarRoutes from './Routes.js/NavbarRoutes';
 
@@ -17,13 +17,13 @@ function App() {
       <BrowserRouter>
         <ToastContainer />
         <Routes>
-          <Route path='/login' element={<Login />} />
-          <Route path='cart' element={<Cart />} />
+          <Route path='/signin' element={<Login />} />
+          <Route path='/cart' element={<Cart />} />
           <Route path='/' element={<Home />} />
           <Route path='/payment-success' element={<PaymentSuccess />} />
-          <Route path='/admin/login' element={<LoginAdmin />} />
-          <Route path='/admin/order/:id' element={<EditOrder />} />
-          {/* <Route element={<NavbarRoutes />} /> */}
+          <Route path='/adminlogin' element={<LoginAdmin />} />/
+          {/* <Route path='/admin/order/:id' element={<EditOrder />} /> */}
+          
         </Routes>
 
         {/* Render admin routing structure separately */}

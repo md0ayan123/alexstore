@@ -7,7 +7,7 @@ dotenv.config();
 const JWT_SECRET = process.env.SECRET_KEY
 
 class UserController {
-    static async register({ fullName, email, password }) {
+    static async register({ fullName, email, password, contact }) {
         try {
             const saltRounds = 10;
             const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -15,13 +15,15 @@ class UserController {
             const newUser = await userService.register({
                 fullName,
                 email,
+                contact,
                 password: hashedPassword
             });
 
             const payload = {
                 id: newUser._id,
                 email: newUser.email,
-                fullName: newUser.fullName
+                fullName: newUser.fullName,
+                contact:newUser.contact
             };
 
             const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
@@ -40,9 +42,9 @@ class UserController {
         }
     }
 
-    static async signup({ email, password }) {
+    static async signin({ email, password }) {
         try {
-            const user = await userService.signup({ email });
+            const user = await userService.signin({ email });
             if (!user) {
                 return {
                     success: false,
@@ -50,7 +52,7 @@ class UserController {
                 };
             }
 
-            const isMatch = bcrypt.compare(password, user.password);
+            const isMatch =await bcrypt.compare(password, user.password);
             if (!isMatch) {
                 return {
                     success: false,
@@ -61,7 +63,8 @@ class UserController {
             const payload = {
                 id: user._id,
                 email: user.email,
-                fullName: user.fullName
+                fullName: user.fullName,
+                contact:user.contact
             };
 
             const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
@@ -79,6 +82,48 @@ class UserController {
             };
         }
     }
+
+    static async listed(req,res){
+        try {
+            const data=await userService.listed()
+            res.status(200).json({
+                success:true,
+                message:"User listed successfully",
+                result:data
+            })
+        } catch (error) {
+            res.status(404).json({
+                succcess:false,
+                message:error.message
+            })
+        }
+    }
+    static async single(req,res){
+        let{id}=req.params
+        try {
+            const data=await userService.single(id)
+            if(!data){
+                res.status(404).json({
+                    success:false,
+                    message:"user not found"
+                })
+            }
+            res.status(200).json({
+                success:true,
+                message:"user found successfully",
+                result:data
+            })
+        
+        } catch (error) {
+            res.status(404).json({
+                success:false,
+                message:error.message
+            })
+            
+        }
+    }
+
+
 }
 
 export default UserController;

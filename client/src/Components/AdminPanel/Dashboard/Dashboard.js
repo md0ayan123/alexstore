@@ -10,6 +10,7 @@ import { BsStarFill } from "react-icons/bs";
 import { HiDotsVertical } from "react-icons/hi";
 import { IoIosTrendingUp } from "react-icons/io";
 import { Chart } from "react-google-charts";
+import { get } from '../../../AxiosService';
 // import AddedProduct from '../AddedProduct/AddedProduct';
 // import CreateProduct from '../CreateProduct/CreateProduct'
 // import OrderList from '../OrderList/OrderList'
@@ -24,9 +25,12 @@ const Dashboard =()=>{
 useEffect(() => {
   async function fetchDashboard() {
     try {
-      const res = await axios.get(`${baseUrl}/admin/dashboard`, {
-        headers: { "Content-Type": "application/json" }
-      });
+      //  const token = localStorage.getItem("token");
+      // const res = await axios.get(`${baseUrl}/admin/dashboard`, {
+      //   // headers: { "Content-Type": "application/json" },
+      //     headers: { Authorization: `Bearer ${token}` }
+      // });
+      const res =await get('/admin/dashboard')
 
       const result = res.data.data;
       setData(result);

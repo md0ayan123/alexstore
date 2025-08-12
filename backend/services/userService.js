@@ -1,14 +1,20 @@
-import registerModel from '../models/register-model.js' 
+import userModel from '../models/user-model.js' 
 
 class user{
     static async register(params){
-        return await registerModel.create(params)
+        return await userModel.create(params)
     }
-    static async signup(params={}){
-        return await registerModel.findOne(params)
+    static async signin(params={}){
+        return await userModel.findOne(params)
     }
      static async count(){
-        return await registerModel.find().countDocuments()
+        return await userModel.find().countDocuments()
+     }
+     static async listed(){
+        return await userModel.find()
+     }
+     static async single(id){
+        return await userModel.findById(id)
      }
 }
 export default user

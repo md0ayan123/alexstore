@@ -1,23 +1,43 @@
-// const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 
-// const isLoggin = (req, res, next) => {
-//     try {
-//         const token = req.header("auth-token");
+const JWT_SECRET = process.env.SECRET_KEY || 'fallback-secret';
 
-//         if (!token) {
-//             return res.status(401).send({ error: "Please authenticate using a valid token" });
-//         }
+const isLoggin = (req, res, next) => {
+    try {
+        const authHeader = req.header("Authorization");
+        if (!authHeader) {
+            return res.status(401).json({ error: "No token provided" });
+        }
 
-//         const data = jwt.verify(token, process.env.SECRET_KEY);
-//         req.user = data.user;
-        
-//         console.log("Decoded token data:", data);
-        
-//         next();
-//     } catch (error) {
-//         return res.status(401).send({ error: "Please authenticate using a valid token" });
-//     }
-// };
+        // Expect "Bearer <token>"
+        const jwtToken = authHeader.replace("Bearer", "").trim();
+        console.log("Token from auth middleware:", jwtToken);
 
-// module.exports = isLoggin;
+        const decoded = jwt.verify(jwtToken, JWT_SECRET);
+        req.user = decoded;
 
+        console.log("Decoded token data:", decoded);
+        next();
+    } catch (error) {
+        console.error("Auth middleware error:", error.message);
+        return res.status(401).json({ error: "Invalid or expired token" });
+    }
+};
+
+export default isLoggin;
+
+export const isAdmin = (req, res, next) => {
+    try {
+        const authHeader = req.header("Authorization");     
+        if (!authHeader) {
+            return res.status(401).json({ error: "No token provided" });
+        }
+
+        const token = authHeader.replace("Bearer", "").trim();
+        const decoded = jwt.verify(token, JWT_SECRET);
+        req.user = decoded;
+        next();
+    } catch (err) {
+        return res.status(401).json({ error: "Invalid or expired token" });
+    }
+};  

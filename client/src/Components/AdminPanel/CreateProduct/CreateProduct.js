@@ -3,7 +3,8 @@ import './createProduct.css'
 import { useState } from 'react';
 import { baseUrl } from '../../../utils/constant';
 import { toast } from 'react-toastify';
-import AdminNavbar from '../adminNavbar/AdminNavbar';
+import { post } from '../../../AxiosService';
+// import AdminNavbar from '../adminNavbar/AdminNavbar';
 
 const CreateProduct = () => {
   const [formData, setFormData] = useState({
@@ -54,11 +55,12 @@ const CreateProduct = () => {
     console.log("Payload sending to backend:", payload);
      
     try {
-      const res = await axios.post(`${baseUrl}/products/create`, payload, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
+      //     const token = localStorage.getItem("token");
+      // const res = await axios.post(`${baseUrl}/products/create`, payload, {
+      //   headers: { Authorization: `Bearer ${token}` }
+      // });
+
+      const res =await post('/product/create',payload)
 
       console.log(res.data);
       toast.success('Product created successfully!');

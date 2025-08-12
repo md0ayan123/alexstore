@@ -2,6 +2,8 @@ import productService from '../services/productService.js'
 
 
 class ProductController{
+
+  
     static async create(req,res){
         try {
             const product=await productService.create(req.body)

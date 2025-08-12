@@ -4,7 +4,6 @@ import { useCart } from '../context/cart._context';
 import { toast } from 'react-toastify';
 import searchIcon from '../../assets/searchicon.png';
 import logo from '../../assets/aLEX.png';
-import shopCartIcon from '../../assets/shopping-bag-icon.jpg';
 import './Navbar.css';
 import { BsHandbag } from "react-icons/bs";
 
@@ -56,31 +55,31 @@ const Navbar = ({onSearch}) => {
             <div className='nav-heading d-flex flex-column justify-content-between align-items-center'>
                     <div className=' nav-content d-flex align-items-center justify-content-between w-100'>
                <div className='nav-logo ml-4'>
-              <img src={logo} alt=""  className='logo' />
+              <img src={logo} alt=""  className='logo ' style={{width:"100px"}}/>
               {/* <span className='fs-3 fst-italic'>ALEX STORE</span> */}
             </div>
               <div className="nav-cart d-flex">
-                <Link  to="/cart" className='' style={{position:"relative" , left:"12px"}}>
-                <span className='text-dark fs-4 '>
+                <Link  to="/cart" className='p-2' style={{position:"relative" , left:"12px"}}>
+                <span className='text-dark fs-6 '>
                        <BsHandbag />
                 </span>
             
                   <span
                     className="badge rounded-pill bg-danger"
-                    style={{ position: 'relative', top: '-17px', left: '-17px' }}
+                    style={{ position: 'relative', top: '-12px', left: '-12px' ,fontSize:"8px" }}
                   >
                     {cartItems.length}
                   </span>
                 </Link>
                 {isToken ? (
                   <button
-                    className="logout-btn px-4 py-2"
+                    className="logout-btn px-3 py-1"
                     onClick={handleLogOut}
                   >
                     Logout
                   </button>
                 ) : (
-                  <Link to="/login" className="login-sigup px-3 py-2" style={{fontSize:"12px"}}>
+                  <Link to="/signin" className="login-sigup px-1 py-1" style={{fontSize:"12px"}}>
                     LOGIN/SIGNUP
                   </Link>
                 )}
@@ -89,8 +88,8 @@ const Navbar = ({onSearch}) => {
             <div className="nav-search-bar w-100 ">
                <div className="search-box d-flex align-items-center py-1" style={{
                   border: "none",
-                  borderRadius: "2px",
-                  // backgroundColor: "#fff"
+                  borderRadius: "12px",
+                  backgroundColor: "#ededed"
                 }}>
                   <img src={searchIcon} alt="" style={{
                     width: "20px",
@@ -107,7 +106,7 @@ const Navbar = ({onSearch}) => {
                     style={{
                       outline: "none",
                       flex: "1",
-                      backgroundColor: "#f5f5f6",
+                      backgroundColor: "#ededed",
                       width: "300px",
                       borderRadius: "2px",
                       height: "15px"
@@ -133,8 +132,8 @@ const Navbar = ({onSearch}) => {
               <div className="nav-search-bar">
                <div className="search-box d-flex align-items-center py-1" style={{
                                  border: "none",
-                                 borderRadius: "2px",
-                                //  backgroundColor: "#fff"
+                                 borderRadius: "12px",
+                                 backgroundColor: "#ededed"
                                }}>
                                  <img src={searchIcon} alt="" style={{
                                    width: "20px",
@@ -151,7 +150,7 @@ const Navbar = ({onSearch}) => {
                                    style={{
                                      outline: "none",
                                      flex: "1",
-                                     backgroundColor: "#f5f5f6",
+                                     backgroundColor: "#ededed",
                                      width: "300px",
                                      borderRadius: "2px",
                                      height: "15px"
@@ -180,7 +179,7 @@ const Navbar = ({onSearch}) => {
                     Logout
                   </button>
                 ) : (
-                  <Link to="/login" className="login-sigup px-4 py-2">
+                  <Link to="/signin" className="login-sigup px-4 py-2">
                     LOGIN/SIGNUP
                   </Link>
                 )}

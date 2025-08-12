@@ -6,9 +6,9 @@ import 'react-loading-skeleton/dist/skeleton.css';
 const CardListShimmer = () => {
   return (
     <>
-  <div className="row w-100 m-0 g-0 p-0 r">
+  <div className="row w-100 m-0 g-0 p-0  ">
   {[...Array(18)].map((_, i) => (
-    <div key={i} className="mt-5 col-6 col-sm-4 col-md-3 col-lg-2 ">
+    <div key={i} className=" mt-md-3 mt-0 col-6 col-sm-4 col-md-3 col-lg-2 ">
    <div className="border">
     <Skeleton height={350} />
     

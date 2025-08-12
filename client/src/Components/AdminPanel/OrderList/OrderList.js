@@ -20,7 +20,12 @@ const OrderList = () => {
 
   const fetchOrderList = async () => {
     try {
-      const res = await axios.get(`${baseUrl}/order/listed`);
+            const token = localStorage.getItem("token");
+      const res = await axios.get(`${baseUrl}/order/listed`,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      });
       setData(res.data);
     } catch (err) {
       console.error("Failed to fetch orders", err);
@@ -37,7 +42,12 @@ const OrderList = () => {
 
   const handleUpdate = async () => {
     try {
-      const res = await axios.put(`${baseUrl}/order/${selectedId}`, { status });
+       const token = localStorage.getItem("token");
+      const res = await axios.put(`${baseUrl}/order/${selectedId}`, { status },{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      });
 
       if (res.data.success) {
         toast.success("Order updated successfully");
@@ -63,7 +73,12 @@ const OrderList = () => {
     if (!confirmDelete) return;
 
     try {
-      const res = await axios.delete(`${baseUrl}/order/${_id}`);
+      const token =localStorage.getItem('token')
+      const res = await axios.delete(`${baseUrl}/order/${_id}`,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      });
       if (res.data.success) {
         setData((prev) => ({
           ...prev,

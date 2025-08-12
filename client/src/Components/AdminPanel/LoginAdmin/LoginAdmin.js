@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom'
 import { baseUrl } from '../../../utils/constant'
 import {toast} from 'react-toastify'
 import logo from '../.././../assets/aLEX.png'
+import { post } from '../../../AxiosService'
 
 const LoginAdmin = () => {
     const navigate=useNavigate()
@@ -23,18 +24,18 @@ const LoginAdmin = () => {
     e.preventDefault();
   
     try {
-      const res = await axios.post(`${baseUrl}/owner/login`, formData, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-
+      // const res = await axios.post(`${baseUrl}/owner/login`, formData, {
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   }
+      // });
+          const res =await post('/owner/login',formData)
       console.log('Login success:', res.data);
       toast.success('Login successful!');
 
       // Redirect or store token if needed
        localStorage.setItem('token', res.data.token);
-       navigate('/admin/createproduct')
+       navigate('/admin/dashboard')
        
 
     } catch (err) {

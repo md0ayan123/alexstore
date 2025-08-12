@@ -4,7 +4,7 @@ import Navbar from '../../Components/Navbar/Navbar';
 import './home.css';
 import { baseUrl } from '../../utils/constant';
 import CardListShimmer from '../CardListShimmer/CardListShimmer';
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 import { Carousel } from 'react-responsive-carousel';
 import img1 from '../../assets/img1.avif'
 import img2 from '../../assets/img2.avif'
@@ -24,7 +24,11 @@ const Home = () => {
   };
 
   const fetchProducts = async () => {
-    const response = await fetch(`${baseUrl}/products/listed`);
+    const response = await fetch(`${baseUrl}/products/listed`,{
+      headers:{
+        "Content-Type":"application/js"
+      }
+    });
     const result = await response.json();
 
     if (response.ok) {
@@ -53,13 +57,19 @@ const Home = () => {
   showStatus={false}
   stopOnHover
   className="mt-5"
+  
 >
   <div>
     <img
       src={img1}
       alt="Slide 1"
       className="w-100"
-      style={{ width: "100%", height: "auto", maxHeight: "500px", objectFit: "cover" }}
+      style={{
+        width: "100%",
+        aspectRatio: "16/9", // forces all to have same proportion
+        objectFit: "cover"
+      }}
+      // style={{ width: "100%", height: "auto", maxHeight: "500px", objectFit: "cover" }}
     />
   </div>
   <div>
@@ -67,15 +77,25 @@ const Home = () => {
       src={img2}
       alt="Slide 2"
       className="w-100"
-      style={{ width: "100%", height: "auto", maxHeight: "500px", objectFit: "cover" }}
+      style={{
+          width: "100%",
+          aspectRatio: "16/9", // forces all to have same proportion
+          objectFit: "cover"
+}}
+      // style={{ width: "100%", height: "auto", maxHeight: "500px", objectFit: "cover" }}
     />
   </div>
   <div>
     <img
       src={img3}
       alt="Slide 3"
-      className="w-100"
-      style={{ width: "100%", height: "auto", maxHeight: "500px", objectFit: "cover" }}
+      className="w-100 "
+      style={{
+        width: "100%",
+        aspectRatio: "16/9", // forces all to have same proportion
+        objectFit: "cover"
+}}
+      // style={{ width: "100%", height: "auto", maxHeight: "500px", objectFit: "cover" }}
     />
   </div>
 </Carousel>

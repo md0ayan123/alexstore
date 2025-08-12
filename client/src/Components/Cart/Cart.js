@@ -7,20 +7,26 @@ import { useNavigate } from 'react-router-dom';
  import { toast } from 'react-toastify';
 import { TfiArrowLeft } from "react-icons/tfi";
 import { RxCross2 } from "react-icons/rx";
-// import asIcon from '../../assets/asIcons.jpg'
 import emptycart from '../../././assets/emptycart.png'
-
  import { Link } from 'react-router-dom';
+import useLoggedInUse from "../../hooks/userHooks";
+import { post } from '../../AxiosService';
 
 const Cart = () => {
   const cartItems = useCart();
   const dispatch = useDispatchCart();
+  const user= useLoggedInUse()
+  console.log(user);
+  
+  
+
  
  
+  const [quantities, setQuantities] = useState(cartItems.map(() => 1));
   const navigate=useNavigate()
 
 
-  const [quantities, setQuantities] = useState(cartItems.map(() => 1));
+
 
   const handleQuantityChange = (index, delta) => {
     setQuantities(prev =>
@@ -60,7 +66,7 @@ const Cart = () => {
       0
     );
 
-    const orderResponse = await axios.post(`${baseUrl}/payment/orders`, {
+    const orderResponse = await post(`/payment/orders`, {
       amount: totalAmount
     });
 
@@ -93,8 +99,8 @@ const Cart = () => {
           amount: totalAmount
         };
 
-        const verifyResponse = await axios.post(`${baseUrl}/payment/success`, paymentData);
-
+        // const verifyResponse = await axios.post(`${baseUrl}/payment/success`, paymentData);
+           const verifyResponse=await post(`/payment/success`,paymentData)
         if (verifyResponse.data.msg === "success") {
           handleCheckout();
           toast.success("Order placed successfully")
@@ -104,9 +110,9 @@ const Cart = () => {
         }
       },
       prefill: {
-        name: "Alex Store",
-        email: "alexstore@example.com",
-        contact: "9608122272",
+        name: user.fullName || "",
+        email: user.email || "",
+        contact: user.contact || "",
       },
       notes: {
         address: "Alex Store Corporate Office",
@@ -126,7 +132,7 @@ const Cart = () => {
   if (!token) {
     toast("Please login to proceed with checkout.");
     setTimeout(()=>{
-     navigate('/login', { state: { from: '/cart' } });
+     navigate('/signin', { state: { from: '/cart' } });
     },2000)
     return;
   }

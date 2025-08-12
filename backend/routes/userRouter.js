@@ -9,9 +9,13 @@ router.post('/register', async (req, res) => {
 });
 
 // SIGNUP
-router.post('/signup', async (req, res) => {
-    const result = await UserController.signup(req.body)
+router.post('/signin', async (req, res) => {
+    const result = await UserController.signin(req.body)
      res.status(result.success ? 200 : 400).json(result);
 });
+// listed user
+router.get('/listed', UserController.listed)
+
+router.get('/:id', UserController.single)
 
 export default router;

@@ -1,12 +1,11 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { baseUrl } from '../../../utils/constant';
 import { toast } from 'react-toastify';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { MdModeEditOutline } from 'react-icons/md';
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import './AddedProduct.css'
+import { get,put,Delete } from '../../../AxiosService';
 
 const AddedProduct = () => {
   const [formData, setFormData] = useState({
@@ -28,7 +27,12 @@ const AddedProduct = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`${baseUrl}/products/listed`);
+      //  const token = localStorage.getItem("token");
+      // const res = await axios.get(`${baseUrl}/products/listed`,{
+      //     headers: { Authorization: `Bearer ${token}` }
+      // }); 
+      const res =await get(`/products/listed`)
+
       setData(res.data);
       setError(null);
     } catch (err) {
@@ -101,9 +105,8 @@ const AddedProduct = () => {
 
     try {
       setUpdating(true);
-      const res = await axios.put(`${baseUrl}/products/${selectedId}`, formData, {
-        headers: { 'Content-Type': 'application/json' },
-      });
+            // const token = localStorage.getItem("token");
+      const res = await put(`/products/${selectedId}`, formData);
 
       if (res.data.success) {
         toast.success('Product updated successfully');
@@ -129,7 +132,8 @@ const handleRemove = async (id) => {
   if (!window.confirm("Are you sure you want to delete this product?")) return;
 
   try {
-    const res = await axios.delete(`${baseUrl}/products/${id}`);
+        // const token = localStorage.getItem("token");
+        const res = await Delete(`/products/${id}`);
 
     if (res.data.success) {
       toast.success("Product deleted successfully");
@@ -173,8 +177,7 @@ const handleRemove = async (id) => {
                 className="form-control mt-3 "
               />
                 </div>
-                
-             
+                           
               <div>
               <label className="form-label">Name</label>
               <input
@@ -197,7 +200,6 @@ const handleRemove = async (id) => {
                 required
               />
             </div>
-
             <div>
               <label className="form-label">Title</label>
               <input
@@ -220,8 +222,7 @@ const handleRemove = async (id) => {
                 required
               />
             </div>
-              </div>
-             
+              </div> 
             </div>         
 
             <Button variant="primary" type="submit" disabled={updating}>
