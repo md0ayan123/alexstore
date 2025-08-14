@@ -55,10 +55,7 @@ const CreateProduct = () => {
     console.log("Payload sending to backend:", payload);
      
     try {
-      //     const token = localStorage.getItem("token");
-      // const res = await axios.post(`${baseUrl}/products/create`, payload, {
-      //   headers: { Authorization: `Bearer ${token}` }
-      // });
+   
 
       const res =await post('/product/create',payload)
 

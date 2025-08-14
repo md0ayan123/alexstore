@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import CardItems from '../CardItems/CardItems';
+import React from 'react'
+import {Suspense} from 'react'
+// import CardItems from '../CardItems/CardItems';
 import Navbar from '../../Components/Navbar/Navbar';
 import './home.css';
 import { baseUrl } from '../../utils/constant';
@@ -9,6 +11,10 @@ import { Carousel } from 'react-responsive-carousel';
 import img1 from '../../assets/img1.avif'
 import img2 from '../../assets/img2.avif'
 import img3 from '../../assets/img3.avif'
+import Loading from './Loading'
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from './ErrorBoundary';
+const CardItems= React.lazy(()=>import('../CardItems/CardItems')) ;
 
 
 const Home = () => {
@@ -110,6 +116,8 @@ const Home = () => {
         key={product._id}
         className="card-container mt-md-3 mt-0  col-6 col-sm-4 col-md-3 col-lg-2 "
       >
+        <ErrorBoundary FallbackComponent={ErrorFallback} onReset={()=>{}}>
+          <Suspense fallback={<Loading /> || <div>loading...</div>}>
         <CardItems
           _id={product._id}
           image={"data:image/jpg;base64," + product.image}
@@ -117,6 +125,8 @@ const Home = () => {
           price={product.price}
           title={product.title}
         />
+        </Suspense>
+        </ErrorBoundary>
       </div>
     ))}
   </div>)}

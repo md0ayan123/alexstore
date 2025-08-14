@@ -18,7 +18,9 @@ const handleAddToCart=async()=>{
   toast.success("Added to card!");
 }
 
-
+// if(Math.random() > 0.5 ){
+//   return new Error("Test Error Boundary")
+// }
 return (
   <div>
       <div class="card " >

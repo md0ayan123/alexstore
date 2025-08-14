@@ -27,10 +27,7 @@ const AddedProduct = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      //  const token = localStorage.getItem("token");
-      // const res = await axios.get(`${baseUrl}/products/listed`,{
-      //     headers: { Authorization: `Bearer ${token}` }
-      // }); 
+ 
       const res =await get(`/products/listed`)
 
       setData(res.data);

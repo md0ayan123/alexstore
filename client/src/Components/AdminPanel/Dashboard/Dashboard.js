@@ -26,10 +26,7 @@ useEffect(() => {
   async function fetchDashboard() {
     try {
       //  const token = localStorage.getItem("token");
-      // const res = await axios.get(`${baseUrl}/admin/dashboard`, {
-      //   // headers: { "Content-Type": "application/json" },
-      //     headers: { Authorization: `Bearer ${token}` }
-      // });
+ 
       const res =await get('/admin/dashboard')
 
       const result = res.data.data;
