@@ -249,7 +249,7 @@ const handleRemove = async (id) => {
                 <th>{index + 1}</th>
                 <td>
                   <img
-                    src={`data:image/jpg;base64,${product.image}`}
+                    src={product.image.length > 300? "data:image/jpg;base64," + product.image:product.image}
                     alt="product"
                     width="50"
                     height="50"

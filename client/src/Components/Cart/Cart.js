@@ -16,7 +16,7 @@ const Cart = () => {
   const cartItems = useCart();
   const dispatch = useDispatchCart();
   const user= useLoggedInUse()
-  console.log(user);
+  // console.log(user);
   
   
 

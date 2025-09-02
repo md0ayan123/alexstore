@@ -57,7 +57,7 @@ const CreateProduct = () => {
     try {
    
 
-      const res =await post('/product/create',payload)
+      const res =await post('/products/create',payload)
 
       console.log(res.data);
       toast.success('Product created successfully!');

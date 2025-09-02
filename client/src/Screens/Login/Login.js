@@ -8,11 +8,12 @@ import { post } from '../../AxiosService';
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(false);
+  const [isCopied,setIsCopied]=useState(false)
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     password: '',
-    contact: ''
+    // contact: ''
   });
 
   const navigate = useNavigate()
@@ -36,32 +37,43 @@ const Login = () => {
         : `${baseUrl}/user/signin`;
 
      
-      let response = await post(url, formData)
+      let response = await post(url,formData)
+      // console.log(response);
+      
 
 
-      if (response.data.user && response.data.token) {
+      if (response?.data?.status && response.data?.user && response.data.token) {
         localStorage.setItem("user", JSON.stringify(response.data.user));
         localStorage.setItem("token", response.data.token);
-      }
-
-      console.log(`User ${isSignIn ? 'registered' : 'logged in'} successfully`, response.data);
-      toast.success(`User ${isSignIn ? 'registered' : 'logged in'} successfully`);
-
-      setFormData({
-        fullName: '',
+        toast.success(`User ${isSignIn ? 'registered' : 'logged in'} successfully`);
+        setFormData({ 
+        fullName: '', 
         email: '',
         password: '',
         contact: ''
       });
-      if (!isSignIn) {
+      // console.log(from ,"frommmm")
         //  localStorage.setItem('token', JSON.stringify(response.data.user || response.data));
         navigate(from)
       }
+
+      // console.log(`User ${isSignIn ? 'registered' : 'logged in'} successfully`, response.data);
+
+      
     } catch (error) {
+      console.log(error,"errrrr")
       console.log(`User ${isSignIn ? 'registration' : 'login'} failed`, error.response ? error.response.data : error);
       toast.error(`User ${isSignIn ? 'registration' : 'login'} failed: ${error.response?.data?.message || 'Something went wrong'}`);
     }
   };
+
+  const handleCopyCred=()=>{
+    setIsCopied(true)
+    setFormData({ 
+        email: 'ayan@test.com',
+        password: '12341234',
+      });
+  }
 
   return (
     <div className='vh-100' >
@@ -87,8 +99,7 @@ const Login = () => {
                 />
               </div>
             )}
-
-            <div className="box-input">
+            {isSignIn &&  <div className="box-input">
               <label className="form-label">Mobile Number</label>
               <input
                 className="rounded p-1 w-100"
@@ -98,7 +109,8 @@ const Login = () => {
                 onChange={handleChange}
                 required
               />
-            </div>
+            </div>}
+           
             <div className="box-input">
               <label className="form-label">Email</label>
               <input
@@ -122,7 +134,8 @@ const Login = () => {
                 required
               />
             </div>
-
+            {!isSignIn && <button type='reset' className={`badge border ${isCopied?"bg-secondary":"bg-info"} cursor-pointer`} onClick={handleCopyCred}>{isCopied?"Copied":"Copy Credentials"}</button>}
+              
             <button
               className="mt-3 rounded p-2 w-100"
               style={{ backgroundColor: "#ff3f6c", color: "#ffff" }}
@@ -135,7 +148,7 @@ const Login = () => {
             >
               {isSignIn ? 'Create Account' : 'Login'}
             </button>
-
+              
             <div className="mt-3">
               {isSignIn ? (
                 <>

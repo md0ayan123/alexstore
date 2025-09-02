@@ -7,7 +7,8 @@ dotenv.config();
 const JWT_SECRET = process.env.SECRET_KEY
 
 class UserController {
-    static async register({ fullName, email, password, contact }) {
+    static async register(req,res) {
+        const {fullName, email, password, contact }=req.body
         try {
             const saltRounds = 10;
             const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -18,46 +19,48 @@ class UserController {
                 contact,
                 password: hashedPassword
             });
-
-            const payload = {
-                id: newUser._id,
-                email: newUser.email,
-                fullName: newUser.fullName,
-                contact:newUser.contact
-            };
-
-            const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
-
-            return {
-                success: true,
-                message: 'User registered successfully',
-                token,
-                user: payload
-            };
+            if(newUser){
+                const payload = {
+                    id: newUser._id,
+                    email: newUser.email,
+                    fullName: newUser.fullName,
+                    contact:newUser.contact
+                };
+    
+                const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '12h' });
+    
+                res.status(200).json({
+                    status: true,
+                    message: 'User registered successfully',
+                    token,
+                    user: payload
+                });
+            }
         } catch (error) {
-            return {
-                success: false,
+            res.status(500).json({
+                status: false,
                 message: error.message
-            };
+            });
         }
     }
 
-    static async signin({ email, password }) {
+    static async signin(req,res) {
+        const {email,password}=req.body
         try {
             const user = await userService.signin({ email });
             if (!user) {
-                return {
+                 res.status(404).json({
                     success: false,
                     message: 'User not found'
-                };
+                });
             }
 
             const isMatch =await bcrypt.compare(password, user.password);
             if (!isMatch) {
-                return {
+                res.status(400).json({
                     success: false,
                     message: 'Invalid credentials'
-                };
+                })
             }
 
             const payload = {
@@ -67,19 +70,20 @@ class UserController {
                 contact:user.contact
             };
 
-            const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
+            const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '12h' });
 
-            return {
-                success: true,
+            res.status(200).json({
+                status: true,
                 message: 'Login successful',
                 token,
                 user: payload
-            };
+            });
         } catch (error) {
-            return {
-                success: false,
+            console.log(error)
+            res.status(500).json({
+                status: false,                                                                                                 
                 message: error.message
-            };
+            });
         }
     }
 

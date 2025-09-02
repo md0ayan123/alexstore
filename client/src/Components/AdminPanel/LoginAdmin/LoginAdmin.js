@@ -9,8 +9,8 @@ import { post } from '../../../AxiosService'
 
 const LoginAdmin = () => {
     const navigate=useNavigate()
+     const [isCopied,setIsCopied]=useState(false)
     const [formData,setFormData]=useState({
-       
         email:"",
         password:""
     })
@@ -44,6 +44,14 @@ const LoginAdmin = () => {
     }
 
 }
+
+  const handleCopyCred=()=>{
+    setIsCopied(true)
+    setFormData({ 
+        email: 'md.ayan835@gmail.com',
+        password: 'iamadeveloper',
+      });
+  }
   return (
     <>
       <div className='nav-admin'>
@@ -60,6 +68,7 @@ const LoginAdmin = () => {
         <input className='input'
           type="email"
           name="email"
+          value={formData.email}
           onChange={handleChange}
           required
         />
@@ -70,11 +79,12 @@ const LoginAdmin = () => {
         <input className='input'
           type="password"
           name="password"
+          value={formData.password}
           onChange={handleChange}
           required
         />
       </div>
-
+     <button type='reset' className={`badge border ${isCopied?"bg-secondary":"bg-info"} cursor-pointer`} onClick={handleCopyCred}>{isCopied?"Copied":"Copy Credentials"}</button>
       <button className="mt-3  p-2  rounded" style={{backgroundColor:"#ff3f6c" ,color:"#ffff" }} type="submit">
         Login
       </button>

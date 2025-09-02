@@ -12,7 +12,7 @@ const SideBar = () => {
 const navigate=useNavigate()
  const handleLogout =()=>{
     localStorage.removeItem("token")
-  navigate('/login')
+  navigate('/admin/login')
   toast.success("Logout successfully")
  }
     return (
@@ -55,14 +55,14 @@ const navigate=useNavigate()
                         </Link>
                     </li>
                 </ul>
-                <ul className='d-flex align-items-center px-3 pt-2  '>
+                <ul className='d-flex align-items-center px-3 pt-2 mb-5 '>
                     <li>
                           <button 
                             onClick={handleLogout} 
                             className='text-decoration-none d-flex align-items-center border text-dark btn btn-link p-0'
                         >
                             <FaSignOutAlt />
-                            <span className='side-bar-text ms-1 d-sm-inline text-dark fw-bold'>Signout</span>
+                            <span className='side-bar-text ms-1 d-sm-inline text-dark fw-bold '>Signout</span>
                         </button>
                     </li>
                 </ul>

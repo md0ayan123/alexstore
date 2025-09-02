@@ -116,11 +116,11 @@ const Home = () => {
         key={product._id}
         className="card-container mt-md-3 mt-0  col-6 col-sm-4 col-md-3 col-lg-2 "
       >
-        <ErrorBoundary FallbackComponent={ErrorFallback} onReset={()=>{}}>
+        <ErrorBoundary FallbackComponent={ErrorFallback} >
           <Suspense fallback={<Loading /> || <div>loading...</div>}>
         <CardItems
           _id={product._id}
-          image={"data:image/jpg;base64," + product.image}
+          image={product.image.length > 300? "data:image/jpg;base64," + product.image:product.image}
           description={product.description}
           price={product.price}
           title={product.title}
