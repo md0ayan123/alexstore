@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { useCart, useDispatchCart } from '../context/cart._context';
 import './cart.css';
-import axios from 'axios';
-import  {baseUrl}  from '../../utils/constant';
 import { useNavigate } from 'react-router-dom';
  import { toast } from 'react-toastify';
 import { TfiArrowLeft } from "react-icons/tfi";
@@ -11,17 +9,16 @@ import emptycart from '../../././assets/emptycart.png'
  import { Link } from 'react-router-dom';
 import useLoggedInUse from "../../hooks/userHooks";
 import { post } from '../../AxiosService';
+import Loader from '../common/Loader';
 
 const Cart = () => {
   const cartItems = useCart();
   const dispatch = useDispatchCart();
   const user= useLoggedInUse()
   // console.log(user);
+ const [loading, setLoading] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   
-  
-
- 
- 
   const [quantities, setQuantities] = useState(cartItems.map(() => 1));
   const navigate=useNavigate()
 
@@ -126,28 +123,41 @@ const Cart = () => {
     paymentObject.open();
   };
 
-  const handlePayment = async () => {
-  const token =localStorage.getItem("token") 
+const handlePayment = async () => {
+  const token = localStorage.getItem("token");
 
   if (!token) {
-    toast("Please login to proceed with checkout.");
-    setTimeout(()=>{
-     navigate('/signin', { state: { from: '/cart' } });
-    },2000)
+    toast.success("Please login to proceed with checkout.");
+    setLoading(true); 
+
+    setTimeout(() => {
+      setLoading(false); 
+      navigate('/signin', { state: { from: '/cart' } });
+    }, 1500); 
     return;
   }
 
-  await displayRazorpay();
-  };
+  try {
+    setIsProcessing(true);
+    await displayRazorpay();
+  } catch (err) {
+    toast.error("Something went wrong, please try again.");
+  } finally {
+    setIsProcessing(false);
+  }
+};
+
 
   const subtotal = cartItems.reduce(
     (acc, item, index) => acc + item.price * quantities[index],
     0
   );
 
+  
   if(cartItems.length === 0)
     return (
-       <div >
+  <div >
+        
         <div className='emptycart-container'>
             <img src={emptycart} alt="" style={{width:"146px", height:"165px"}}/>
             <span className='fw-bold fs-5' style={{color:"#424553"}}>Hey, it feels so light!</span>
@@ -162,6 +172,7 @@ const Cart = () => {
   )
 
   return (
+    <>{loading && <Loader message="Redirecting to Login..." />}
     <div className='cart-page ' >
       <div className='cart_heading border px-4 py-2'>
         <div className='d-flex align-items-center gap-5 '>
@@ -217,8 +228,8 @@ const Cart = () => {
          <span className='fw-normal'>${subtotal.toFixed(2)}</span>
       </div>
       <div className="text-end mt-2">
-        <button className="placeOrder-btn mb-5" onClick={handlePayment}>
-          CHECKOUT
+        <button className="placeOrder-btn mb-5" disabled={isProcessing} onClick={handlePayment}>
+         {isProcessing ? "Processing..." : "CHECKOUT"}
         </button>
       </div>
       </div>  
@@ -227,6 +238,7 @@ const Cart = () => {
 
     
     </div>
+    </>  
   );
 };
 

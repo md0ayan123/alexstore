@@ -5,6 +5,7 @@ import { baseUrl } from '../../utils/constant';
 import { toast } from 'react-toastify';
 import logo from '../../assets/aLEX.png';
 import { post } from '../../AxiosService';
+import Loader from '../../Components/common/Loader';
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(false);
@@ -15,6 +16,7 @@ const Login = () => {
     password: '',
     // contact: ''
   });
+  const[isLoading,SetIsLoading]=useState(false)
 
   const navigate = useNavigate()
 
@@ -29,6 +31,7 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
+      SetIsLoading(true);
     e.preventDefault();
 
     try {
@@ -65,6 +68,10 @@ const Login = () => {
       console.log(`User ${isSignIn ? 'registration' : 'login'} failed`, error.response ? error.response.data : error);
       toast.error(`User ${isSignIn ? 'registration' : 'login'} failed: ${error.response?.data?.message || 'Something went wrong'}`);
     }
+    finally {
+    SetIsLoading(false); // stop loader
+  }
+
   };
 
   const handleCopyCred=()=>{
@@ -135,19 +142,20 @@ const Login = () => {
               />
             </div>
             {!isSignIn && <button type='reset' className={`badge border ${isCopied?"bg-secondary":"bg-info"} cursor-pointer`} onClick={handleCopyCred}>{isCopied?"Copied":"Copy Credentials"}</button>}
-              
-            <button
-              className="mt-3 rounded p-2 w-100"
-              style={{ backgroundColor: "#ff3f6c", color: "#ffff" }}
-              type="submit"
-              disabled={
-                isSignIn
-                  ? !formData.fullName || !formData.email || !formData.password
-                  : !formData.email || !formData.password
-              }
-            >
-              {isSignIn ? 'Create Account' : 'Login'}
-            </button>
+              <button
+                className="mt-3 rounded p-2 w-100"
+                style={{ backgroundColor: "#ff3f6c", color: "#ffff" }}
+                type="submit"
+                disabled={
+                  isLoading || (
+                    isSignIn
+                      ? !formData.fullName || !formData.email || !formData.password
+                      : !formData.email || !formData.password
+                  )
+                }
+              >
+                {isLoading ? <Loader size={20} color="#fff" /> : (isSignIn ? 'Create Account' : 'Login')}
+              </button>
               
             <div className="mt-3">
               {isSignIn ? (
