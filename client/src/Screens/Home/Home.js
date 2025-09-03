@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import React from 'react'
 import {Suspense} from 'react'
-// import CardItems from '../CardItems/CardItems';
+import CardItems from '../CardItems/CardItems';
 import Navbar from '../../Components/Navbar/Navbar';
 import './home.css';
 import { baseUrl } from '../../utils/constant';
@@ -14,7 +14,7 @@ import img3 from '../../assets/img3.avif'
 import Loading from './Loading'
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from './ErrorBoundary';
-const CardItems= React.lazy(()=>import('../CardItems/CardItems')) ;
+// const CardItems= React.lazy(()=>import('../CardItems/CardItems')) ;
 
 
 const Home = () => {
@@ -123,7 +123,7 @@ const Home = () => {
    
 
   { !filteredProducts.length ?  ( <CardListShimmer/> ) : (<div className="row w-100 m-0 g-0 p-0   ">
- {filteredProducts.slice(0, displayCount).map((product) => (
+ {filteredProducts.map((product) => (
       <div
         key={product._id}
         className="card-container mt-md-3 mt-0  col-6 col-sm-4 col-md-3 col-lg-2 "
@@ -142,7 +142,7 @@ const Home = () => {
       </div>
     ))}
   </div>)}
-  {filteredProducts.length > displayCount && (
+  {/* {filteredProducts.length > displayCount && (
   <div className="text-center mt-3">
     <button
       className="border rounded text-white px-2 btn-sm mb-4" style={{backgroundColor:"#ff3f6c"}}
@@ -151,7 +151,7 @@ const Home = () => {
       Load More
     </button>
   </div>
-)}
+)} */}
 </div>
 
  </>
