@@ -20,6 +20,7 @@ const CardItems= React.lazy(()=>import('../CardItems/CardItems')) ;
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [displayCount, setDisplayCount] = useState(12);
 
   const handleSearch = (query) => {
     const filtered = products.filter(product =>
@@ -48,6 +49,17 @@ const Home = () => {
   useEffect(() => {
     fetchProducts();
   }, []);
+
+  useEffect(() => {
+  const handleResize = () => {
+    setDisplayCount(window.innerWidth < 768 ? 4 : 12); // mobile vs desktop
+  };
+
+  handleResize(); // run on first load
+  window.addEventListener("resize", handleResize);
+
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
 
   return (
     <>
@@ -111,7 +123,7 @@ const Home = () => {
    
 
   { !filteredProducts.length ?  ( <CardListShimmer/> ) : (<div className="row w-100 m-0 g-0 p-0   ">
-    {filteredProducts.map((product) => (
+ {filteredProducts.slice(0, displayCount).map((product) => (
       <div
         key={product._id}
         className="card-container mt-md-3 mt-0  col-6 col-sm-4 col-md-3 col-lg-2 "
@@ -130,6 +142,16 @@ const Home = () => {
       </div>
     ))}
   </div>)}
+  {filteredProducts.length > displayCount && (
+  <div className="text-center mt-3">
+    <button
+      className="border rounded text-white px-2 btn-sm mb-4" style={{backgroundColor:"#ff3f6c"}}
+      onClick={() => setDisplayCount(displayCount + (window.innerWidth < 768 ? 4 : 12))}
+    >
+      Load More
+    </button>
+  </div>
+)}
 </div>
 
  </>
